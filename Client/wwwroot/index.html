@@ -216,6 +216,21 @@ BABYLON.SceneLoader.ImportMesh("", "", "https://hefzdroje.github.io/libs/freza.s
 ////////////////////////////////////////////////////////////////////////////////////////////////////
     return scene;
 };
+
+var engine = new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true });
+var scene = createScene();
+engine.runRenderLoop(function () {
+    if (scene) {
+        scene.render();
+    }
+});
+// Resize
+window.addEventListener("resize", function () {
+    engine.resize();
+});
+
+
+
         
 //__________________________________________________________________________________________________________        
     </script>
