@@ -9,6 +9,53 @@
     <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
     <link href="css/app.css" rel="stylesheet" />
     <link href="BlazorBasic.styles.css" rel="stylesheet" />
+
+
+    <!--mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm-->
+        <script src="https://code.jquery.com/pep/0.4.2/pep.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.6.2/dat.gui.min.js"></script>
+        <script src="https://preview.babylonjs.com/ammo.js"></script>
+        <script src="https://preview.babylonjs.com/cannon.js"></script>
+        <script src="https://preview.babylonjs.com/Oimo.js"></script>
+
+        <script src="https://preview.babylonjs.com/earcut.min.js"></script>
+        <script src="https://preview.babylonjs.com/babylon.js"></script>
+        <script src="https://preview.babylonjs.com/inspector/babylon.inspector.bundle.js"></script>
+        <script src="https://preview.babylonjs.com/materialsLibrary/babylonjs.materials.min.js"></script>
+        <script src="https://preview.babylonjs.com/proceduralTexturesLibrary/babylonjs.proceduralTextures.min.js"></script>
+        <script src="https://preview.babylonjs.com/postProcessesLibrary/babylonjs.postProcess.min.js"></script>
+        <script src="https://preview.babylonjs.com/serializers/babylonjs.serializers.min.js"></script>
+        <script src="https://preview.babylonjs.com/gui/babylon.gui.min.js"></script>
+        <script src="https://preview.babylonjs.com/loaders/babylonjs.loaders.min.js"></script>
+    
+        <style>
+            html, body {
+                overflow: hidden;
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            #renderCanvas {
+                width: 50%;
+                height: 50%;
+                touch-action: none;
+            }
+            textarea {
+                width: 90%;
+                height: 150px;
+                padding: 12px 20px;
+                box-sizing: border-box;
+                border: 2px solid #ccc;
+                border-radius: 4px;
+                background-color: #cccccc;
+                font-size: 16px;
+                resize: none;
+            }
+        </style>
+
+    <!--mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm-->
+    
 </head>
 
 <body>
@@ -23,41 +70,160 @@
     <script src="_framework/blazor.webassembly.js"></script>
 
     <!---->
-    
-    <script src="https://preview.babylonjs.com/babylon.js"></script>
-    <script src="https://preview.babylonjs.com/loaders/babylonjs.loaders.min.js"></script>
-    <script src="https://code.jquery.com/pep/0.4.3/pep.js"></script>
-    <script src="https://code.jquery.com/pep/0.4.2/pep.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.6.2/dat.gui.min.js"></script>
-    <script src="https://preview.babylonjs.com/ammo.js"></script>
-    <script src="https://preview.babylonjs.com/cannon.js"></script>
-    <script src="https://preview.babylonjs.com/Oimo.js"></script>
-    
-    <!--
-    <script src="https://preview.babylonjs.com/gltf_validator.js"></script>
-    -->
-   
-    <script src="https://preview.babylonjs.com/earcut.min.js"></script>
+<!--mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm-->    
+    <canvas id="renderCanvas"></canvas>
 
-    
-        <script src="https://preview.babylonjs.com/inspector/babylon.inspector.bundle.js"></script>
-        <script src="https://preview.babylonjs.com/materialsLibrary/babylonjs.materials.min.js"></script>
-        <script src="https://preview.babylonjs.com/proceduralTexturesLibrary/babylonjs.proceduralTextures.min.js"></script>
-        <script src="https://preview.babylonjs.com/postProcessesLibrary/babylonjs.postProcess.min.js"></script>
-        <script src="https://preview.babylonjs.com/serializers/babylonjs.serializers.min.js"></script>
-        <script src="https://preview.babylonjs.com/gui/babylon.gui.min.js"></script>
-        <script src="https://preview.babylonjs.com/loaders/babylonjs.loaders.min.js"></script>
+    <form style="position: absolute; top: 500px; left: 400px; " id="usrform">
+    <textarea id="myTextarea" rows="4" cols="50" name="comment" >
+    dejte slovo červený na 0 pozici textu a vyčkejte na levou obrátku frézy</textarea>
+    </form>
 
-<canvas id="renderCanvas"></canvas>
-    
+
+
     <script>
-    console.log(" console jojojo ");
-//__________________________________________________________________________________________________________        
+console.log("označení všeho -> Ctrl+Shift+šipka vpravo    v poli I/0 ->    /vstupni text;     v poli prikazu pro paty zaznam ->      5,5!!! ")
+        let canvas = document.getElementById("renderCanvas");
 
-        
-//__________________________________________________________________________________________________________        
+var createScene = function () {
+    var scene = new BABYLON.Scene(engine);
+    var camera = new BABYLON.ArcRotateCamera("Camera", 0, 0, 10, new BABYLON.Vector3(0, 0, 0), scene);
+    camera.setPosition(new BABYLON.Vector3(20, 200, 400));
+    camera.attachControl(canvas, true);
+
+    scene.clearColor = new BABYLON.Color3(0.7, 0.7, 0.7);
+
+    var light1 = new BABYLON.PointLight("omni", new BABYLON.Vector3(0, -20, 0), scene);
+    light1.state = "on";
+
+
+    var sphere = BABYLON.MeshBuilder.CreateSphere("sphere", { diameter: 3.5 }, scene);
+    var mat = new BABYLON.StandardMaterial("mat1", scene);
+    mat.emissiveColor = new BABYLON.Color3(0.9, 0.5, 0.0);
+    sphere.material = mat;
+    sphere.position.y = -2;
+
+    BABYLON.SceneLoader.ImportMesh("", "", "trion.stl", scene, function (newMeshes0) { 
+    var cyl0 = newMeshes0[0];
+    var mat0 = new BABYLON.StandardMaterial("mat10", scene);
+    mat0.emissiveColor = new BABYLON.Color3(0.0, 0.9, 0.73);
+    cyl0.material = mat0;
+    cyl0.position.x = 50;
+
+
+  BABYLON.SceneLoader.ImportMesh("", "", "freza.stl", scene, function (newMeshes)
+       { // beg ImportMesh freza
+       var cyl = newMeshes[0];
+       var mat = new BABYLON.StandardMaterial("mat1", scene);
+       mat.emissiveColor = new BABYLON.Color3(0.4, 0.4, 0.4);
+       cyl.material = mat;
+
+//-------------------------------------ANIMACE----------------------------------------------------------------
+
+    var axisy0 = new BABYLON.Vector3(0, 6, 0);
+    var axisx0 = new BABYLON.Vector3(6, 0, 0);
+    var axisz0 = new BABYLON.Vector3(0, 0, 6);
+
+    var axisy = new BABYLON.Vector3(0, 6, 0);
+    var axisx = new BABYLON.Vector3(6, 0, 0);
+    var axisz = new BABYLON.Vector3(0, 0, 6);
+
+    cyl.rotate(axisy, Math.PI / 2, BABYLON.Space.LOCAL);
+
+
+        rever = 0.3;
+        var smer = 3;
+        cit = 0;
+        var angle = 0.03;
+        var mex = document.getElementById("myTextarea").value;
+        //var mex = ""; //"červený";
+        scene.registerBeforeRender(function () { // beg animations
+
+
+            //cyl.rotate(axisz, angle*10, BABYLON.Space.LOCAL);
+            cyl.rotate(axisy, angle * smer  );
+            
+            cit += rever;
+
+
+            if (cit <= 100)
+            { 
+               //console.log(" ------cit------ = ",cit);
+                cyl.position.x = cit;
+
+                sphere.scaling.x = cit/15;
+                sphere.scaling.y = cit/15;
+                sphere.scaling.z = cit/15;
+            }
+
+            
+            if (cit > 100)
+                { 
+                    //location.reload();
+                    //console.log(" + + + mevar  = ",mevar);
+                    
+
+                        mex = document.getElementById("myTextarea").value;
+                        //document.getElementById("demo").innerHTML = mex;
+
+                        if (mex.indexOf("červený") == 0)
+                            { 
+                                //mat.emissiveColor = new BABYLON.Color3(0.1, 0.45, 0.45); //modrá(0.3, 0.3, 0.55)
+                                mat0.emissiveColor = new BABYLON.Color3(0.95, 0.2, 0.4);
+                                cyl0.rotate(axisx0, -Math.PI / 2, BABYLON.Space.LOCAL);
+                                smer = -3; 
+                            }
+                            else
+                            { 
+                                //mat.emissiveColor = new BABYLON.Color3(0.55, 0.55, 0.3);
+                                //mat.emissiveColor = new BABYLON.Color3(0.4, 0.4, 0.4);
+                                mat0.emissiveColor = new BABYLON.Color3(0.0, 0.9, 0.73);
+                                cyl0.rotate(axisx0, Math.PI / 2, BABYLON.Space.LOCAL);
+                                smer = 3;
+                            }
+    
+
+
+                    //console.log(" +++ MEX 06  = ",mex);
+                    //cit = 0;
+                    rever = rever*-1;
+                }
+                if (cit < 0)
+                    { 
+                        //console.log(" - - - mevar = ",mevar);
+                        rever = rever*-1;
+                    }
+
+        }); // end animations
+
+
+
+//---------------------------------------end ANIMACE--------------------------------------------------------------
+
+
+
+
+    });  //end  pro ImportMesh freza
+    });  //end  pro ImportMesh trion
+    return scene;
+}
+
+        var engine = new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true });
+        var scene = createScene();
+
+
+        engine.runRenderLoop(function () {
+            if (scene) {
+                scene.render();
+            }
+        });
+
+        window.addEventListener("resize", function () {
+            engine.resize();
+        });
+
     </script>
 
+<!--mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm-->
     
 </body>
 
