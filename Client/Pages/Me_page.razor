@@ -21,6 +21,36 @@
 
 @{
     ShowMessage();
+//------------------------------------------------------------------------------------
+using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
+using System.Threading.Tasks;
+using BabylonBlazor.Babylon;
+using System;
+using System.Dynamic;
+using System.Collections.Generic;
+
+namespace BabylonBlazor.Shared
+{
+    public class BabylonCanvasBase : ComponentBase
+    {
+        [Inject] IJSRuntime JsRuntime { get; set; }
+        //[Inject] IBabylonFactory Babylon { get; set; }
+
+        protected async override Task OnAfterRenderAsync(bool firstRender)
+        {
+            await base.OnAfterRenderAsync(firstRender);
+
+            if (firstRender)
+            {
+                //await JsRuntime.InvokeVoidAsync("babylonInterop.initCanvas", "babylon-canvas");
+                Console.WriteLine(" c šarp je ");
+            }
+        }
+    }
+}
+
+//------------------------------------------------------------------------------------
  }
 
 <!--
