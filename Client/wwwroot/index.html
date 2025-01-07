@@ -12,6 +12,7 @@
 
     <!--mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm-->
         <script src="https://code.jquery.com/pep/0.4.2/pep.min.js"></script>
+        <script src="https://code.jquery.com/pep/0.4.3/pep.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.6.2/dat.gui.min.js"></script>
         <script src="https://preview.babylonjs.com/ammo.js"></script>
         <script src="https://preview.babylonjs.com/cannon.js"></script>
@@ -27,6 +28,10 @@
         <script src="https://preview.babylonjs.com/gui/babylon.gui.min.js"></script>
         <script src="https://preview.babylonjs.com/loaders/babylonjs.loaders.min.js"></script>
     
+        <script src="_framework/blazor.webassembly.js"></script>
+        <script src="scripts/babylonInterop.js"></script>
+        <script src="scripts/babylonMevar.js"></script>
+
         <style>
             html, body {
                 overflow: hidden;
@@ -66,8 +71,9 @@
         <a class="dismiss">🗙</a>
     </div>
     
+    <!--
     <script src="_framework/blazor.webassembly.js"></script>
-
+    -->
     <!---->
 <!--mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm-->    
     <!--<canvas id="renderCanvas"></canvas>-->
@@ -84,7 +90,7 @@
 -->
 <canvas id="renderCanvas" background-color="#444444" style="border:20px solid #fff;"></canvas>
 <br>
-<textarea id="myTextarea" rows="4" cols="50" name="comment" >dejte slovo červený na 0 pozici textu a vyčkejte na levou obrátku frézy </textarea>
+<textarea id="myTextarea" rows="4" cols="50" name="comment" >01dejte slovo červený na 0 pozici textu a vyčkejte na levou obrátku frézy</textarea>
     
     <script>
         
