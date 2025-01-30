@@ -34,13 +34,13 @@ DotNet.attachReviver(function (key, value) {
 
 babylonInterop.initCanvas = function (canvasId) {
 
-/*    
+    
     if (mevar == "restartuj")
         { 
             mevar = "animuj";
             location.reload();
         }
-*/
+
     var babylonCanvas = document.getElementById(canvasId);
     var babylonEngine = new BABYLON.Engine(babylonCanvas, true);
     var scene = babylonInterop.createSceneWithSphere(babylonEngine, babylonCanvas);
