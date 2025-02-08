@@ -1,45 +1,7 @@
 ﻿var babylonInterop = babylonInterop || {};
 
-/*
-babylonInterop.objRefs = {};
-babylonInterop.objRefId = 0;
-babylonInterop.objRefKey = '__jsObjRefId';
-babylonInterop.storeObjRef = function (obj) {
-    var id = babylonInterop.objRefId++;
-    babylonInterop.objRefs[id] = obj;
-    var objRef = {};
-    objRef[babylonInterop.objRefKey] = id;
-    return objRef;
-}
-babylonInterop.removeObjectRef = function (id) {
-    delete babylonInterop.objRefs[id];
-}
-
-DotNet.attachReviver(function (key, value) {
-    if (value &&
-        typeof value === 'object' &&
-        value.hasOwnProperty(babylonInterop.objRefKey) &&
-        typeof value[babylonInterop.objRefKey] === 'number') {
-        var id = value[babylonInterop.objRefKey];
-        if (!(id in babylonInterop.objRefs)) {
-            throw new Error("The JS object reference doesn't exist: " + id);
-        }
-        const instance = babylonInterop.objRefs[id];
-        return instance;
-    } else {
-        return value;
-    }
-});
-*/
 
 babylonInterop.initCanvas = function (canvasId) {
-
-
-    if (mevar == "restartuj")
-        { 
-            mevar = "animuj";
-            location.reload();
-        }
 
 
     var babylonCanvas = document.getElementById(canvasId);
@@ -124,7 +86,23 @@ babylonInterop.createSceneWithSphere = function (engine, canvas) {
         cit = 0;
         var angle = 0.03;
         var mex = document.getElementById("myTextarea").value;
+        var predpage = "nic";
+        var nynipage = "dejte slovo červený na 0 pozici textu a vyčkejte na levou obrátku frézy";
         scene.registerBeforeRender(function () { // beg animations
+
+            nynipage = document.getElementById("myTextarea").value;
+
+            if (nynipage != predpage)
+                { 
+
+                 if ((nynipage.indexOf("červený") >= 0)&&(predpage.indexOf("jiný") == 0))
+                    { 
+                        //console.log(" nynipage  = ",nynipage," predpage  = ",predpage);
+                        location.reload();
+                    }
+                    predpage = nynipage;
+
+                }
 
 
             ////cyl.rotate(axisz, angle*10, BABYLON.Space.LOCAL);
@@ -135,7 +113,7 @@ babylonInterop.createSceneWithSphere = function (engine, canvas) {
 
             if (cit <= 100)
             { 
-               //console.log(" ------cit------ = ",cit);
+               //console.log(" ------cit- - - --- = ",cit);
                 cyl.position.x = cit;
 
                 sphere.scaling.x = cit/15;
@@ -146,12 +124,11 @@ babylonInterop.createSceneWithSphere = function (engine, canvas) {
             
             if (cit > 100)
                 { 
-                    //location.reload();
-                    //console.log(" + + + mevar  = ",mevar);
                     
 
                         mex = document.getElementById("myTextarea").value;
                         //document.getElementById("demo").innerHTML = mex;
+
 
                         if (mex.indexOf("červený") == 0)
                             { 
@@ -197,46 +174,3 @@ babylonInterop.createSceneWithSphere = function (engine, canvas) {
     return scene;
 };
 
-/*
-babylonInterop.createArcRotateCamera = function (name, alpha, beta, radius, target, scene, canvasId) {
-    var camera = new BABYLON.ArcRotateCamera(name, alpha, beta, radius, target, scene);
-    var canvas = document.getElementById(canvasId);
-    camera.attachControl(canvas, true);
-    return babylonInterop.storeObjRef(camera);
-}
-
-babylonInterop.createEngine = function (canvasId, antialias) {
-    var babylonCanvas = document.getElementById(canvasId);
-    var babylonEngine = new BABYLON.Engine(babylonCanvas, antialias);
-    window.addEventListener("resize", function () {
-        babylonEngine.resize();
-    });
-    return babylonInterop.storeObjRef(babylonEngine);
-}
-
-babylonInterop.createHemisphericLight = function (name, direction, scene) {
-    return babylonInterop.storeObjRef(new BABYLON.HemisphericLight(name, direction, scene));
-}
-
-babylonInterop.createPointLight = function (name, direction, scene) {
-    return babylonInterop.storeObjRef(new BABYLON.PointLight(name, direction, scene));
-}
-
-babylonInterop.createScene = function (engine) {
-    return babylonInterop.storeObjRef(new BABYLON.Scene(engine));
-}
-
-babylonInterop.createSphere = function (name, options, scene) {
-    return babylonInterop.storeObjRef(BABYLON.MeshBuilder.CreateSphere(name, options, scene));
-}
-
-babylonInterop.createVector3 = function (x, y, z) {
-    return babylonInterop.storeObjRef(new BABYLON.Vector3(x, y, z));
-}
-
-babylonInterop.runRenderLoop = function (engine, scene) {
-    engine.runRenderLoop(function () {
-        scene.render();
-    });
-}
-*/    
