@@ -1,13 +1,13 @@
 @page "/me_page"
-<h3>Me_page - výstupy C# </h3>
+<h3>Me_page - testíky na výstupy </h3>
 <!---->
 
-<!-- tenhle form je umístěn mimo stránku a zabraňuje chybě při setrvání na Me_page -->
-<!--
-<form style="position: absolute; top: 5000px; left: 400px; " id="usrform">
-<textarea id="myTextarea" rows="4" cols="50" name="comment" ></textarea>
+<!-- tenhle form zabraňuje chybě při setrvání na Me_page -->
+
+<form style="position: absolute; top: 550px; left: 350px; " id="usrform">
+<textarea id="myTextarea">jinýtext</textarea>
 </form>
--->
+
 
 @functions {
     private string message = " !  !  !  Hello, Blazor! ";
@@ -15,6 +15,7 @@
 
     private void ShowMessage()
     {
+        //Console.WriteLine(message + " na konzolu " + pridat + " promprog = " + promprog);
         Console.WriteLine(message + " na konzolu " + pridat);
     }
 }
@@ -23,12 +24,6 @@
     ShowMessage();
  }
 
-<!--
-<script>
-console.log(" ------MEVAR------ = ",mevar);
-var mevar = "restartuj";
-</script >
--->
 
 <br>
 <br>
@@ -63,3 +58,4 @@ var mevar = "restartuj";
 <br>
 <br>
 <br>
+
