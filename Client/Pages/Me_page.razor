@@ -1,4 +1,8 @@
 @page "/me_page"
+@inject IWebHostEnvironment Environment
+@inject IJSRuntime JS
+
+
 <h3>Me_page - testíky na výstupy </h3>
 <!---->
 
@@ -28,6 +32,29 @@ Console.WriteLine(" test na načtení souboru ");
 //---------------------------------------------------------------
 
  }
+
+
+
+<h3>Tvorba souboru</h3>
+
+<button @onclick="VytvorSoubor">Potvrdit vytvoření</button>
+
+
+@code {
+
+    static void VytvorSoubor()
+    {
+ 
+        DirectoryInfo dir = Directory.CreateDirectory("MujAdr");
+        File.WriteAllText("MujAdr/novýsoubor_08.txt", "888888888888888888888888888");
+        //DirectoryInfo dir = Directory.CreateDirectory("Mujdir");
+
+    }
+}
+
+
+
+
 
 
 <br>
